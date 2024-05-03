@@ -2,10 +2,13 @@ package com.hrms.entity;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +36,7 @@ public class Employee {
 	private String nationality;
 	private String ctc;
 	private String employeeType;
+	private String designation;
 	private String officeLocation;
 	private int days;
 	private LocalDate joiningDate;
@@ -41,4 +45,8 @@ public class Employee {
 	private String appoinmentLetterPath;
 	private String relivingLetterPath;
 	private String experienceLetterPath;
+
+	@ManyToOne
+	@JsonBackReference
+	private Department department;
 }

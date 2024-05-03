@@ -2,6 +2,8 @@ package com.hrms.dto;
 
 import java.time.LocalDate;
 
+import com.hrms.entity.Department;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,7 @@ public class EmployeeDTO {
 	private String nationality;
 	private String ctc;
 	private String employeeType;
+	private String designation;
 	private String officeLocation;
 	private int days;
 	private LocalDate joiningDate;
@@ -34,5 +37,7 @@ public class EmployeeDTO {
 	private String appoinmentLetterPath;
 	private String relivingLetterPath;
 	private String experienceLetterPath;
+	
+	private Department department;
 
 }
