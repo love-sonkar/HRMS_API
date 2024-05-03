@@ -1,0 +1,67 @@
+package com.hrms.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.hrms.dto.EmployeeDTO;
+import com.hrms.service.EmployeeService;
+
+@RestController
+@RequestMapping("/hr/employee")
+public class EmployeeController {
+
+	@Autowired
+	private EmployeeService service;
+
+//	add new employee
+	@PostMapping("/add")
+	public ResponseEntity<EmployeeDTO> addEmployee(@RequestParam("profile") MultipartFile profile,
+			@RequestParam("appoinment") MultipartFile appoinmentLetter,
+			@RequestParam("reliving") MultipartFile relivingLetter,
+			@RequestParam("experience") MultipartFile excerienceLetter, @RequestParam("employee") String dto)
+			throws IOException {
+		System.out.println(dto);
+		ObjectMapper obj = new ObjectMapper();
+		obj.registerModule(new JavaTimeModule());
+		obj.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		EmployeeDTO emp = obj.readValue(dto, EmployeeDTO.class);
+		EmployeeDTO createEmployee = this.service.createEmployee(profile, appoinmentLetter, relivingLetter,
+				excerienceLetter, emp);
+		return new ResponseEntity<EmployeeDTO>(createEmployee, HttpStatus.CREATED);
+	}
+
+//	get single employee details
+	@GetMapping("/getEmp/{id}")
+	public ResponseEntity<EmployeeDTO> getEmployee(@PathVariable Long id) {
+		EmployeeDTO employee = this.service.getEmployee(id);
+		return new ResponseEntity<EmployeeDTO>(employee, HttpStatus.OK);
+	}
+
+//	get all employee details
+	@GetMapping("/getAllEmp")
+	public ResponseEntity<List<EmployeeDTO>> getAllEmployee() {
+		List<EmployeeDTO> allEmployee = this.service.getAllEmployee();
+		return new ResponseEntity<List<EmployeeDTO>>(allEmployee, HttpStatus.OK);
+	}
+
+//	get employee details by employee id
+	@GetMapping("/getEmployeeByEmpId/{empId}")
+	public ResponseEntity<EmployeeDTO> getEmployeeByEmpId(@PathVariable String empId) {
+		EmployeeDTO employee = this.service.getEmployeeByEmpId(empId);
+		return new ResponseEntity<EmployeeDTO>(employee, HttpStatus.OK);
+	}
+}
