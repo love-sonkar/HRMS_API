@@ -29,14 +29,14 @@ public class ProjectsServiceImpl implements ProjectsService {
 		if (!file.isEmpty()) {
 			String fileUploadDir = "E:\\Railworld India\\HRMS_Backend\\src\\main\\resources\\static\\Projects File";
 			try {
-				String filePath = fileUploadDir + File.separator + file.getOriginalFilename();
 				String fileExtension = file.getOriginalFilename()
 						.substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+				String filePath = fileUploadDir + File.separator + projectDto.getProjectId() + "." + fileExtension;
 				File destFile = new File(filePath);
 				file.transferTo(destFile);
 
 				// Set the file path in the user DTO
-				projectDto.setFilePath(projectDto.getProjectId()+"."+fileExtension);
+				projectDto.setFilePath(projectDto.getProjectId() + "." + fileExtension);
 
 			} catch (IOException e) {
 				e.printStackTrace();
