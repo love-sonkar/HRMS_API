@@ -32,12 +32,14 @@ public class EmployeeDTO {
 	private String officeLocation;
 	private int days;
 	private LocalDate joiningDate;
+	private String status;
+	private String type;
 
 	private String profilePath;
 	private String appoinmentLetterPath;
 	private String relivingLetterPath;
 	private String experienceLetterPath;
-	
+
 	private Department department;
 
 }

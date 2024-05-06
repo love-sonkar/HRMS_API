@@ -40,6 +40,8 @@ public class Employee {
 	private String officeLocation;
 	private int days;
 	private LocalDate joiningDate;
+	private String status;
+	private String type;
 
 	private String profilePath;
 	private String appoinmentLetterPath;
