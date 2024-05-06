@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hrms.dto.EmployeeDTO;
+import com.hrms.dto.EmployeeProjectDTO;
 
 public interface EmployeeService {
 	EmployeeDTO createEmployee(MultipartFile profile, MultipartFile appoinmentLetter, MultipartFile relivingLetter,
@@ -18,4 +19,6 @@ public interface EmployeeService {
 	List<EmployeeDTO> getAllEmployee();
 
 	EmployeeDTO getEmployeeByEmpId(String empId);
+	
+	EmployeeProjectDTO getSingleEmployeeWithProject(Long id);
 }

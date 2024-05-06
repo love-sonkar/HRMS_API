@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hrms.dto.EmployeeDTO;
+import com.hrms.dto.EmployeeProjectDTO;
 import com.hrms.service.EmployeeService;
 
 @CrossOrigin("*")
@@ -65,5 +66,12 @@ public class EmployeeController {
 	public ResponseEntity<EmployeeDTO> getEmployeeByEmpId(@PathVariable String empId) {
 		EmployeeDTO employee = this.service.getEmployeeByEmpId(empId);
 		return new ResponseEntity<EmployeeDTO>(employee, HttpStatus.OK);
+	}
+
+//	get employee details with his project details
+	@GetMapping("/getEmployeeWithProject/{id}")
+	public ResponseEntity<EmployeeProjectDTO> getEmployeeWithProjectByEmpId(@PathVariable Long id) {
+		EmployeeProjectDTO singleEmployeeWithProject = this.service.getSingleEmployeeWithProject(id);
+		return new ResponseEntity<EmployeeProjectDTO>(singleEmployeeWithProject, HttpStatus.OK);
 	}
 }

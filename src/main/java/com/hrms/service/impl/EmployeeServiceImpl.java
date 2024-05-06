@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hrms.dto.EmployeeDTO;
+import com.hrms.dto.EmployeeProjectDTO;
 import com.hrms.entity.Employee;
 import com.hrms.exception.ResourceNotFoundException;
 import com.hrms.repo.EmployeeRepository;
@@ -141,6 +142,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 				.orElseThrow(() -> new ResourceNotFoundException("Employee", "id", empId));
 		EmployeeDTO dto = this.mapper.map(employee, EmployeeDTO.class);
 		return dto;
+	}
+
+	@Override
+	public EmployeeProjectDTO getSingleEmployeeWithProject(Long id) {
+		Employee employee = this.repo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
+		EmployeeProjectDTO mapped = this.mapper.map(employee, EmployeeProjectDTO.class);
+		return mapped;
 	}
 
 }

@@ -1,11 +1,16 @@
 package com.hrms.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,4 +43,8 @@ public class Projects {
 	private String skillsRequired;
 
 	private String filePath;
+
+	@ManyToMany(mappedBy = "projects", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Employee> employee;
 }
