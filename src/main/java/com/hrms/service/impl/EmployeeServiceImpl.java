@@ -33,11 +33,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 			String profileUploadDir = "E:\\Railworld India\\HRMS_Backend\\src\\main\\resources\\static\\Profile";
 			try {
 				String filePath = profileUploadDir + File.separator + profile.getOriginalFilename();
+				String fileExtension = profile.getOriginalFilename()
+						.substring(profile.getOriginalFilename().lastIndexOf(".") + 1);
 				File destFile = new File(filePath);
 				profile.transferTo(destFile);
 
 				// Set the image path in the user DTO
-				dto.setProfilePath(filePath);
+				dto.setProfilePath(dto.getEmployeeId() + "_profile" + "." + fileExtension);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -49,11 +51,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 			String appointmentUploadDir = "E:\\Railworld India\\HRMS_Backend\\src\\main\\resources\\static\\Appoinment Letter";
 			try {
 				String filePath = appointmentUploadDir + File.separator + appoinmentLetter.getOriginalFilename();
+				String fileExtension = appoinmentLetter.getOriginalFilename()
+						.substring(appoinmentLetter.getOriginalFilename().lastIndexOf(".") + 1);
 				File destFile = new File(filePath);
 				appoinmentLetter.transferTo(destFile);
 
 				// Set the image path in the user DTO
-				dto.setAppoinmentLetterPath(filePath);
+				dto.setAppoinmentLetterPath(dto.getEmployeeId() + "_appoinmentLetter" + "." + fileExtension);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -65,11 +69,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 			String relivingUploadDir = "E:\\Railworld India\\HRMS_Backend\\src\\main\\resources\\static\\Reliving Letter";
 			try {
 				String filePath = relivingUploadDir + File.separator + relivingLetter.getOriginalFilename();
+				String fileExtension = relivingLetter.getOriginalFilename()
+						.substring(relivingLetter.getOriginalFilename().lastIndexOf(".") + 1);
 				File destFile = new File(filePath);
 				relivingLetter.transferTo(destFile);
 
 				// Set the image path in the user DTO
-				dto.setRelivingLetterPath(filePath);
+				dto.setRelivingLetterPath(dto.getEmployeeId() + "_relivingLetter" + "." + fileExtension);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -81,11 +87,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 			String experienceUploadDir = "E:\\Railworld India\\HRMS_Backend\\src\\main\\resources\\static\\Experience Letter";
 			try {
 				String filePath = experienceUploadDir + File.separator + experienceLetter.getOriginalFilename();
+				String fileExtension = experienceLetter.getOriginalFilename()
+						.substring(experienceLetter.getOriginalFilename().lastIndexOf(".") + 1);
 				File destFile = new File(filePath);
 				experienceLetter.transferTo(destFile);
 
 				// Set the image path in the user DTO
-				dto.setExperienceLetterPath(filePath);
+				dto.setExperienceLetterPath(dto.getEmployeeId() + "_experienceLetter" + "." + fileExtension);
 
 			} catch (IOException e) {
 				e.printStackTrace();
