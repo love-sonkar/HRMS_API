@@ -11,4 +11,10 @@ public interface CandidateService {
 	CandidateDTO newCandidate(MultipartFile resume, CandidateDTO dto) throws IOException;
 
 	List<CandidateDTO> getAllCandidate();
+	
+	List<CandidateDTO> getAllCandidateInDescOrder();
+	
+	CandidateDTO selectCandidate(Long id);
+	
+	CandidateDTO rejectCandidate(Long id);
 }

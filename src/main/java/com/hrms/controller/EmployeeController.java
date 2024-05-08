@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hrms.dto.EmployeeDTO;
+import com.hrms.dto.EmployeeForLeaveDTO;
 import com.hrms.dto.EmployeeProjectDTO;
 import com.hrms.service.EmployeeService;
 
@@ -73,5 +74,19 @@ public class EmployeeController {
 	public ResponseEntity<EmployeeProjectDTO> getEmployeeWithProjectByEmpId(@PathVariable Long id) {
 		EmployeeProjectDTO singleEmployeeWithProject = this.service.getSingleEmployeeWithProject(id);
 		return new ResponseEntity<EmployeeProjectDTO>(singleEmployeeWithProject, HttpStatus.OK);
+	}
+
+//	get all employee details with his leave details
+	@GetMapping("/getAllEmployeeWithLeave")
+	public ResponseEntity<List<EmployeeForLeaveDTO>> getAllEmployeeWithLeave() {
+		List<EmployeeForLeaveDTO> allEmployeeDetailsForLeave = this.service.getAllEmployeeDetailsForLeave();
+		return new ResponseEntity<List<EmployeeForLeaveDTO>>(allEmployeeDetailsForLeave, HttpStatus.OK);
+	}
+
+//	get single employee details with his leave details
+	@GetMapping("/getEmployeeWithLeave/{id}")
+	public ResponseEntity<EmployeeForLeaveDTO> getEmployeeWithLeave(@PathVariable Long id) {
+		EmployeeForLeaveDTO employeeDetailsForLeave = this.service.getEmployeeDetailsForLeave(id);
+		return new ResponseEntity<EmployeeForLeaveDTO>(employeeDetailsForLeave, HttpStatus.OK);
 	}
 }

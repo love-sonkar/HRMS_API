@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.hrms.dto.CandidateDTO;
 import com.hrms.entity.Candidate;
+import com.hrms.enums.CandidateStatus;
+import com.hrms.exception.ResourceNotFoundException;
 import com.hrms.repo.CandidateRepository;
 import com.hrms.service.CandidateService;
 
@@ -46,6 +48,7 @@ public class CandidateServiceImpl implements CandidateService {
 		}
 
 		Candidate candidate = this.mapper.map(dto, Candidate.class);
+		candidate.setStatus(CandidateStatus.PENDING);
 		candidate.setAppliedDate(LocalDate.now());
 		Candidate savedCandidate = this.candiRepo.save(candidate);
 		CandidateDTO mapped = this.mapper.map(savedCandidate, CandidateDTO.class);
@@ -60,6 +63,36 @@ public class CandidateServiceImpl implements CandidateService {
 			return mapped;
 		}).collect(Collectors.toList());
 		return collectedCandidate;
+	}
+
+	@Override
+	public List<CandidateDTO> getAllCandidateInDescOrder() {
+		List<Candidate> desc = this.candiRepo.findAllByOrderByCandidateIdDesc();
+		List<CandidateDTO> collecttedList = desc.stream().map(dto -> {
+			CandidateDTO candidateDTO = this.mapper.map(dto, CandidateDTO.class);
+			return candidateDTO;
+		}).collect(Collectors.toList());
+		return collecttedList;
+	}
+
+	@Override
+	public CandidateDTO selectCandidate(Long id) {
+		Candidate candidate = this.candiRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Candidate", "id", id));
+		candidate.setStatus(CandidateStatus.ACCEPTED);
+		Candidate saved = this.candiRepo.save(candidate);
+		CandidateDTO candidateDTO = this.mapper.map(saved, CandidateDTO.class);
+		return candidateDTO;
+	}
+
+	@Override
+	public CandidateDTO rejectCandidate(Long id) {
+		Candidate candidate = this.candiRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Candidate", "id", id));
+		candidate.setStatus(CandidateStatus.REJECTED);
+		Candidate saved = this.candiRepo.save(candidate);
+		CandidateDTO candidateDTO = this.mapper.map(saved, CandidateDTO.class);
+		return candidateDTO;
 	}
 
 }

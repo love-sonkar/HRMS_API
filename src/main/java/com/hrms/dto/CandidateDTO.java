@@ -2,6 +2,8 @@ package com.hrms.dto;
 
 import java.time.LocalDate;
 
+import com.hrms.enums.CandidateStatus;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,4 +19,5 @@ public class CandidateDTO {
 	private String appliedFor;
 	private String candidateCvPath;
 	private LocalDate appliedDate;
+	private CandidateStatus status;
 }

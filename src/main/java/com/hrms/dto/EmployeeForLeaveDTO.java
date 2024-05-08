@@ -1,19 +1,11 @@
-package com.hrms.entity;
+package com.hrms.dto;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hrms.entity.Department;
+import com.hrms.entity.Leaves;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,10 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Employee {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EmployeeForLeaveDTO {
 	private Long id;
 	private String employeeId;
 	private String firstName;
@@ -53,15 +42,7 @@ public class Employee {
 	private String relivingLetterPath;
 	private String experienceLetterPath;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JsonIgnore
 	private Department department;
 
-	@ManyToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<Projects> projects;
-
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-	@JsonIgnore
 	private List<Leaves> leaveList;
 }

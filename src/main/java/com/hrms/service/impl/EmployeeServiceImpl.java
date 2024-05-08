@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hrms.dto.EmployeeDTO;
+import com.hrms.dto.EmployeeForLeaveDTO;
 import com.hrms.dto.EmployeeProjectDTO;
 import com.hrms.entity.Employee;
 import com.hrms.exception.ResourceNotFoundException;
@@ -149,6 +150,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee employee = this.repo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
 		EmployeeProjectDTO mapped = this.mapper.map(employee, EmployeeProjectDTO.class);
+		return mapped;
+	}
+
+	@Override
+	public List<EmployeeForLeaveDTO> getAllEmployeeDetailsForLeave() {
+		List<Employee> findAllEmp = this.repo.findAll();
+		List<EmployeeForLeaveDTO> collectted = findAllEmp.stream().map(empLeave -> {
+			EmployeeForLeaveDTO mapped = this.mapper.map(empLeave, EmployeeForLeaveDTO.class);
+			return mapped;
+		}).collect(Collectors.toList());
+		return collectted;
+	}
+
+	@Override
+	public EmployeeForLeaveDTO getEmployeeDetailsForLeave(Long id) {
+		Employee employee = this.repo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
+		EmployeeForLeaveDTO mapped = this.mapper.map(employee, EmployeeForLeaveDTO.class);
 		return mapped;
 	}
 

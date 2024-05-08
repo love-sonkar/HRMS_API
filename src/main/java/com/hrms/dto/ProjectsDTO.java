@@ -1,6 +1,9 @@
 package com.hrms.dto;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.hrms.entity.Employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,4 +34,6 @@ public class ProjectsDTO {
 	private String skillsRequired;
 
 	private String filePath;
+	
+	private List<Employee> employee;
 }

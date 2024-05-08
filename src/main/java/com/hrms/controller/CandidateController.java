@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +41,26 @@ public class CandidateController {
 	public ResponseEntity<List<CandidateDTO>> allCandidates() {
 		List<CandidateDTO> allCandidate = this.service.getAllCandidate();
 		return new ResponseEntity<List<CandidateDTO>>(allCandidate, HttpStatus.OK);
+	}
 
+//	get all candidates in descending order
+	@GetMapping("/allCandidateDesc")
+	public ResponseEntity<List<CandidateDTO>> allCandidatesDesc() {
+		List<CandidateDTO> allCandidate = this.service.getAllCandidateInDescOrder();
+		return new ResponseEntity<List<CandidateDTO>>(allCandidate, HttpStatus.OK);
+	}
+
+//	select candidate
+	@PostMapping("/selectCandidate/{id}")
+	public ResponseEntity<CandidateDTO> selectedCandidate(@PathVariable Long id) {
+		CandidateDTO selectedCandidate = this.service.selectCandidate(id);
+		return new ResponseEntity<CandidateDTO>(selectedCandidate, HttpStatus.OK);
+	}
+
+//	reject candidate
+	@PostMapping("/rejectCandidate/{id}")
+	public ResponseEntity<CandidateDTO> rejectedCandidate(@PathVariable Long id) {
+		CandidateDTO rejectedCandidate = this.service.rejectCandidate(id);
+		return new ResponseEntity<CandidateDTO>(rejectedCandidate, HttpStatus.OK);
 	}
 }

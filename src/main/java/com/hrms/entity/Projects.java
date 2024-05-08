@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,7 +43,7 @@ public class Projects {
 
 	private String filePath;
 
-	@ManyToMany(mappedBy = "projects", cascade = CascadeType.ALL)
+	@ManyToMany
 	@JsonIgnore
 	private List<Employee> employee;
 }

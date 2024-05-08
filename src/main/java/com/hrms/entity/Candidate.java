@@ -2,6 +2,8 @@ package com.hrms.entity;
 
 import java.time.LocalDate;
 
+import com.hrms.enums.CandidateStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,5 +26,7 @@ public class Candidate {
 	private String appliedFor;
 	private String candidateCvPath;
 	private LocalDate appliedDate;
+	private CandidateStatus status;
+	
 
 }
