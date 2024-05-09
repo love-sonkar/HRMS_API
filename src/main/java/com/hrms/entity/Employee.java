@@ -48,6 +48,8 @@ public class Employee {
 	private String status;
 	private String type;
 
+	private String password;
+
 	private String profilePath;
 	private String appoinmentLetterPath;
 	private String relivingLetterPath;

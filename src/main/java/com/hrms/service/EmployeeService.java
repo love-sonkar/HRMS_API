@@ -26,4 +26,6 @@ public interface EmployeeService {
 	List<EmployeeForLeaveDTO> getAllEmployeeDetailsForLeave();
 	
 	EmployeeForLeaveDTO getEmployeeDetailsForLeave(Long id);
+	
+	EmployeeDTO updatePassword(Long id, String password);
 }

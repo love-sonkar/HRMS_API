@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -88,5 +89,13 @@ public class EmployeeController {
 	public ResponseEntity<EmployeeForLeaveDTO> getEmployeeWithLeave(@PathVariable Long id) {
 		EmployeeForLeaveDTO employeeDetailsForLeave = this.service.getEmployeeDetailsForLeave(id);
 		return new ResponseEntity<EmployeeForLeaveDTO>(employeeDetailsForLeave, HttpStatus.OK);
+	}
+
+//	change password
+	@PutMapping("/updatePassword/{id}")
+	public ResponseEntity<EmployeeDTO> updatePassword(@PathVariable Long id,
+			@RequestParam("password") String password) {
+		EmployeeDTO updatePassword = this.service.updatePassword(id, password);
+		return new ResponseEntity<EmployeeDTO>(updatePassword, HttpStatus.OK);
 	}
 }

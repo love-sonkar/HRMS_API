@@ -1,10 +1,14 @@
 package com.hrms;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.hrms.entity.Employee;
 import com.hrms.repo.EmployeeRepository;
 import com.hrms.repo.ProjectsRepository;
 
@@ -61,6 +65,7 @@ public class HrmsBackendApplication implements CommandLineRunner {
 //			// Handle the case when entities are not found in the database
 //			System.out.println("One or more entities not found in the database.");
 //		}
+
 	}
 
 }

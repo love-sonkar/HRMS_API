@@ -68,4 +68,14 @@ public class ProjectsServiceImpl implements ProjectsService {
 		return projectsDTO;
 	}
 
+	@Override
+	public List<ProjectsDTO> getAllProjectDeatilsDesc() {
+		List<Projects> allProjects = this.projectRepo.findAllByOrderByIdDesc();
+		List<ProjectsDTO> collectted = allProjects.stream().map(projects -> {
+			ProjectsDTO map = this.mapper.map(projects, ProjectsDTO.class);
+			return map;
+		}).collect(Collectors.toList());
+		return collectted;
+	}
+
 }

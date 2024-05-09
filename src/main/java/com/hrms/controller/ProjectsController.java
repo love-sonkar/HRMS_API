@@ -56,4 +56,11 @@ public class ProjectsController {
 		return new ResponseEntity<ProjectsDTO>(project, HttpStatus.OK);
 	}
 
+//	get all project in descending order
+	@GetMapping("/getAllProjectDesc")
+	public ResponseEntity<List<ProjectsDTO>> getAllProjectDesc() {
+		List<ProjectsDTO> allProjectDeatilsDesc = this.service.getAllProjectDeatilsDesc();
+		return new ResponseEntity<List<ProjectsDTO>>(allProjectDeatilsDesc, HttpStatus.OK);
+	}
+
 }

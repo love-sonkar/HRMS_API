@@ -108,6 +108,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 
 		Employee mapedEmployee = this.mapper.map(dto, Employee.class);
+		mapedEmployee.setPassword(mapedEmployee.getEmployeeId() + "@" + mapedEmployee.getFirstName());
 		Employee savedEmp = this.repo.save(mapedEmployee);
 		EmployeeDTO map = this.mapper.map(savedEmp, EmployeeDTO.class);
 
@@ -168,6 +169,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee employee = this.repo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
 		EmployeeForLeaveDTO mapped = this.mapper.map(employee, EmployeeForLeaveDTO.class);
+		return mapped;
+	}
+
+	@Override
+	public EmployeeDTO updatePassword(Long id, String password) {
+		Employee emp = this.repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
+		emp.setPassword(password);
+		this.repo.save(emp);
+		EmployeeDTO mapped = this.mapper.map(emp, EmployeeDTO.class);
 		return mapped;
 	}
 

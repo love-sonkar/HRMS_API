@@ -2,6 +2,8 @@ package com.hrms.dto;
 
 import java.time.LocalDate;
 
+import com.hrms.entity.Employee;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +17,6 @@ public class LeavesDTO {
 	private String leaveDetails;
 	private String attachedDocuments;
 	private LocalDate appliedDate;
+	
+	private Employee employee;
 }
