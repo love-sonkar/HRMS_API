@@ -55,7 +55,7 @@ public class Employee {
 	private String relivingLetterPath;
 	private String experienceLetterPath;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnore
 	private Department department;
 
